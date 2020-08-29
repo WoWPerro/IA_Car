@@ -79,7 +79,7 @@ public class Matriz
         {
             for (int j = 0; j < columns; j++)
             {
-                mat[i, j] = UnityEngine.Random.Range(-10f, 10f);
+                mat[i, j] = UnityEngine.Random.Range(-100f, 100f);
             }
         }
     }
@@ -109,6 +109,7 @@ public class Matriz
                 for (int j = 0; j < m1.columns; j++)
                 {
                     if(i < crosspointC || j < crosspointR)
+                    //if(i < crosspointC)
                     {
                         mr.SetAt(i, j, m1.GetAt(i, j));
                     }
@@ -130,7 +131,7 @@ public class Matriz
         {
             int n1 = UnityEngine.Random.Range(0, rows - 1);
             int n2 = UnityEngine.Random.Range(0, columns - 1);
-            mat[n1, n2] = mat[n1,n2] + UnityEngine.Random.Range(-10, 10);
+            mat[n1, n2] = mat[n1,n2] + UnityEngine.Random.Range(-100, 100);
         }
     }
 

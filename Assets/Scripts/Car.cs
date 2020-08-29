@@ -13,9 +13,9 @@ public class Car : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        forward = transform.TransformDirection(Vector3.forward) * 20;
-        left = transform.TransformDirection(new Vector3(.5f,0,1)) * 20;
-        right = transform.TransformDirection(new Vector3(-.5f, 0, 1)) * 20;
+        forward = transform.TransformDirection(Vector3.forward) * 30;
+        left = transform.TransformDirection(new Vector3(.5f,0,1)) * 30;
+        right = transform.TransformDirection(new Vector3(-.5f, 0, 1)) * 30;
         pos = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
         Debug.DrawRay(pos, forward, Color.red);
         Debug.DrawRay(pos, left, Color.red);
@@ -31,21 +31,21 @@ public class Car : MonoBehaviour
         Ray RL = new Ray(pos, left);
         Ray RR = new Ray(pos, right);
 
-        ForwardDistance = 20;
-        LeftDistance = 20;
-        RightDistance = 20;
+        ForwardDistance = 1;
+        LeftDistance = 1;
+        RightDistance = 1;
 
-        if (Physics.Raycast(pos, forward, out hit, 20))
+        if (Physics.Raycast(pos, forward, out hit, 30))
         {
-            ForwardDistance = hit.distance;
+            ForwardDistance = hit.distance/30;
         }
-        if (Physics.Raycast(pos, left, out hit2, 20))
+        if (Physics.Raycast(pos, left, out hit2, 30))
         {
-            RightDistance = hit2.distance;
+            RightDistance = hit2.distance/30;
         }
-        if (Physics.Raycast(pos, right, out hit3, 20))
+        if (Physics.Raycast(pos, right, out hit3, 30))
         {
-            LeftDistance = hit3.distance;
+            LeftDistance = hit3.distance/30;
         }
         //Debug.Log("L: " + LeftDistance + "   F: " + ForwardDistance + "   R: " + RightDistance);
     }

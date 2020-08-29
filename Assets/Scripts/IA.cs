@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IA : MonoBehaviour
 {
+    public Text scoreText;
     public int capas = 2;
     public int neuronas = 10;
     public Matriz[] pesos;
@@ -101,13 +103,15 @@ public class IA : MonoBehaviour
             resolve();
 
             transform.Translate(Vector3.forward * acceleration);
-            transform.rotation = Quaternion.Euler(0, rotation, 0);
+            //transform.rotation = Quaternion.Euler(0, rotation *30, 0);
+            transform.eulerAngles = transform.eulerAngles + new Vector3(0, (rotation * 90) * 0.02f, 0);
 
             distanceTraveled += Vector3.Distance(transform.position, lastPosition);
             lastPosition = transform.position;
             accelerationPR += acceleration;
             accelerationProm++;
             SetScore();
+            //scoreText.text = score.ToString();
         }
         
     }
@@ -131,7 +135,8 @@ public class IA : MonoBehaviour
         {
             for (int j = 0; j < m.columns; j++)
             {
-                m.SetAt(i, j, MathL.Sigmoid(m.GetAt(i, j)));
+                //m.SetAt(i, j, MathL.Sigmoid(m.GetAt(i, j)));
+                m.SetAt(i, j, (float)MathL.HyperbolicTangtent(m.GetAt(i, j)));
             }
         }
         return m;
@@ -139,7 +144,7 @@ public class IA : MonoBehaviour
 
     void ActivationLast(Matriz m)
     {
-        rotation = (float)Math.Tanh(m.GetAt(0, 0));
+        rotation = (float)MathL.HyperbolicTangtent(m.GetAt(0, 0));
         acceleration = MathL.Sigmoid(m.GetAt(1, 0));
     }
 
@@ -148,8 +153,8 @@ public class IA : MonoBehaviour
         float FD = GetComponent<Car>().ForwardDistance;
         float RD = GetComponent<Car>().RightDistance;
         float LD = GetComponent<Car>().LeftDistance;
-        float s = (FD + RD + LD) / 60;
-        s += (distanceTraveled/10) + (acceleration/10);
+        float s = (FD + RD + LD) / 3;
+        s += ((distanceTraveled*8) + (acceleration));
         score += (float)Math.Pow(s,2);
     }
 
