@@ -1,9 +1,4 @@
-﻿
-using Boo.Lang;
-using System;
-using System.Diagnostics;
-using System.Numerics;
-using UnityEngine;
+﻿using System;
 
 public class Matriz
 {

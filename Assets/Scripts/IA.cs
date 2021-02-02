@@ -148,7 +148,7 @@ public class IA : MonoBehaviour
         acceleration = MathL.Sigmoid(m.GetAt(1, 0));
     }
 
-    void SetScore()
+    void SetScore()//FitnessFunction
     {
         float FD = GetComponent<Car>().ForwardDistance;
         float RD = GetComponent<Car>().RightDistance;
